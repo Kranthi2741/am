@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mother's Day Special</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-shadow: 2px 2px 4px #000;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                url('images/a7.jpg') no-repeat center center/cover;
+            opacity: 0.6;
+            z-index: -1;
+        }
+
+        .content {
+            text-align: center;
+            z-index: 1;
+            padding: 20px;
+            animation: fadeIn 2s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: 24px;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            font-size: 20px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 105, 180, 0.8);
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s;
+        }
+
+        .btn:hover {
+            background: rgba(255, 105, 180, 1);
+            transform: scale(1.05);
+        }
+
+        /* Petal animation */
+        .petal {
+            position: absolute;
+            top: -10px;
+            width: 20px;
+            height: 20px;
+            background: pink;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Cursor heart */
+        body {
+            cursor: url('https://cdn-icons-png.flaticon.com/512/833/833472.png') 16 16, auto;
+        }
+    </style>
+</head>
+
+<body onclick="playMusic()">
+    <div class="content">
+        <div class="title">Happy Mother's Day 💐</div>
+        <div class="subtitle">
+            Celebrate the unconditional love, warmth, and magic of mothers everywhere.<br>
+        </div>
+        <button class="btn" onclick="triggerConfetti(); setTimeout(() => { location.href='surprise.html'; }, 1000);">
+            Celebrate Now
+        </button>
+    </div>
+
+    <audio id="bg-music" src="music\Pedave Palikina-SenSongsMp3.Co.mp3" preload="auto"></audio>
+
+    <script>
+        // Falling petals
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            petal.style.left = Math.random() * window.innerWidth + 'px';
+            petal.style.animationDuration = 5 + Math.random() * 5 + 's';
+            document.body.appendChild(petal);
+            setTimeout(() => petal.remove(), 10000);
+        }
+        setInterval(createPetal, 300);
+
+        // Background music play
+        function playMusic() {
+            const music = document.getElementById('bg-music');
+            if (music.paused) {
+                music.play().catch(e => console.log('Autoplay blocked'));
+            }
+        }
+
+        // Confetti animation
+        function triggerConfetti() {
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.width = '10px';
+                confetti.style.height = '10px';
+                confetti.style.background = `hsl(${Math.random() * 360}, 100%, 70%)`;
+                confetti.style.left = Math.random() * window.innerWidth + 'px';
+                confetti.style.top = '-10px';
+                confetti.style.opacity = 0.8;
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                confetti.style.borderRadius = '50%';
+                confetti.style.zIndex = 999;
+                document.body.appendChild(confetti);
+
+                const duration = 3 + Math.random() * 2;
+                confetti.animate([
+                    { transform: `translateY(0)`, opacity: 1 },
+                    { transform: `translateY(${window.innerHeight + 100}px)`, opacity: 0 }
+                ], {
+                    duration: duration * 1000,
+                    easing: 'ease-out'
+                });
+
+                setTimeout(() => confetti.remove(), duration * 1000);
+            }
+        }
+    </script>
+</body>
+
+</html>

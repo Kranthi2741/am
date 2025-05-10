@@ -1,0 +1,89 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f8ff;
+}
+
+.landing-page,
+.image-gallery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    flex-direction: column;
+    background-image: url('https://via.placeholder.com/1600x900?text=Background+Image');
+    background-size: cover;
+    color: white;
+}
+
+.note h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.note p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border: none;
+    background-color: #ff69b4;
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #ff1493;
+}
+
+h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+/* Image Container */
+.image-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    animation: moveImages 5s infinite alternate;
+}
+
+/* Keyframes for Image Movement (left to right) */
+@keyframes moveImages {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(100px);
+        /* Move the images to the right */
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* Image Styling */
+.move-img {
+    width: 300px;
+    height: 200px;
+    border-radius: 10px;
+    object-fit: cover;
+    /* Ensures images fill the space without distortion */
+    transition: transform 0.5s ease, opacity 0.3s ease;
+}
+
+/* Hover effects to rotate the images */
+.move-img:hover {
+    transform: rotate(360deg);
+    opacity: 0.8;
+}
